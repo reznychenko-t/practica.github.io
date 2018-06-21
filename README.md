@@ -59,4 +59,6 @@
 
 >Настройки:
 
+![3](https://user-images.githubusercontent.com/32157237/41733389-62f050b6-758c-11e8-9f40-5e6aae13a831.PNG)
+
 
