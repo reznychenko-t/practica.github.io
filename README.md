@@ -54,7 +54,7 @@
 
 >Структура: 
 
-
+![2](https://user-images.githubusercontent.com/32157237/41733238-f2e9c892-758b-11e8-8154-72c28830cbeb.PNG)
 
 
 >Настройки:
