@@ -32,6 +32,8 @@
 
 - Игра;
 
+![1](https://user-images.githubusercontent.com/32157237/41732622-260abf12-758a-11e8-8e52-600bdc6c8883.PNG)
+
 
 **4.	Приложение**
 
