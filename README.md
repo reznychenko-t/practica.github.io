@@ -32,7 +32,6 @@
 
 - Игра;
 
-![1](https://octodex.github.com/1.jpeg)
 
 **4.	Приложение**
 
