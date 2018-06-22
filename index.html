@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	
+	<meta charset="utf-8">
+	<title>Тетрис</title> 
+	<meta name="description" content="Essentia Responsive Bootstrap Theme by Bootstrap Master"/>
+	<meta name="keywords" content="Template, Theme, web, html5, css3, Bootstrap" />
+	<meta name="author" content="Łukasz Holeczek from creativeLabs"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta property="og:title" content=""/>
+	<meta property="og:description" content=""/>
+	<meta property="og:type" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:image" content=""/>
+	
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/slider1.css" rel="stylesheet">
+	<link href="css/slider2.css" rel="stylesheet">
+	<link href="css/slider3.css" rel="stylesheet">
+	<link  href="css/style1.css"  rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
+	
+	<style>
+  
+   
+  </style>
+
+</head>
+<body>
+
+		<header>
+		
+		<div class="container">
+			<div class="row-fluid">
+				<div class="navigation"> 
+					<div class="navbar navbar-fixed-top">
+			    		<div class="navbar-inner">
+			          		<a class="btn btn-navbar btnOverlay" data-toggle="collapse" data-target=".nav-collapse">
+			            		menu
+			          		</a>
+			          		<div class="nav-collapse collapse">
+			            		<ul class="nav">
+									<li><a href="#" class="home">Главная</a></li>
+			              			<li><a href="#" class="services">Про игру</a></li>
+									
+			            		</ul>
+			          		</div>
+			        	</div>
+			      	</div>
+				
+				
+				</div>	
+				
+					
+			</div>
+			
+		</div>		
+			
+	</header>
+	<!--end: Header-->
+	<!-- start: 1st Page - Home -->
+
+<div >
+	<div id="home">
+		<div class="demo-1">
+	        <div id="slider" class="sl-slider-wrapper">
+				<div class="sl-slider">
+					
+
+					<div class="sl-slide bg-2" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-slide-inner">
+							
+							
+						</div>
+					</div>
+
+					<div class="sl-slide bg-3" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+						<div class="sl-slide-inner"></div>
+							
+							
+					</div>
+
+					<div class="sl-slide bg-4" data-orientation="vertical" data-slice1-rotation="-5" data-slice2-rotation="25" data-slice1-scale="2" data-slice2-scale="1">
+						<div class="sl-slide-inner"></div>
+					</div>
+
+					<diSv class="sl-slide bg-5" data-orientation="horizontal" data-slice1-rotation="-5" data-slice2-rotation="10" data-slice1-scale="2" data-slice2-scale="1">
+						<div class="sl-slide-inner">			
+						</div>
+					</div>
+				</div>
+
+				<nav id="nav-arrows" class="nav-arrows">
+					<span class="nav-arrow-prev">Previous</span>
+					<span class="nav-arrow-next">Next</span>
+				</nav>
+
+				
+
+			</div><!-- /slider-wrapper -->
+
+	    </div>
+
+	<!-- end: 1st Page - Home -->
+
+	<div class="layer2">
+		<script id="tetrisBoard" type="vue-x/template">
+		  <div>
+		    <div class="row" v-for="y in value.h">
+		      <div class="col" v-for="x in value.w" v-bind:style="{backgroundColor: value[(x-1)+(y-1)*value.w],}"></div><br/>
+		    </div>
+		  </div>
+		</script>
+		<div id="tetris" v-on:keydown="keydown" v-on:keyup="keyup" tabindex="1">
+		  <div class="game" v-show="state !== 'settings'">
+		    <div class="main" v-bind:style="{'--brickSize': brickSize+'px'}">
+		      <tetris-board class="board" v-model="board" ref="board"></tetris-board>
+		      <div class="info">
+		        <tetris-board class="preview" v-model="preview" ref="preview"></tetris-board>Счет: {{ score }}<br/>Лучший счет: {{ highScore }}<br/>Скорость: {{ speed }}<br/>
+		        <button v-on:click="newGame()"><u>Н</u>овая игра</button><br/>
+		        <button v-on:click="pause()"><u>П</u>ауза</button><br/>
+		        <button v-on:click="showSettings()">Настройки</button><br/>Контроль с помощью: <BR>W, A, S, D.
+		      </div>
+		    </div>
+		    <div class="text-info" style="clear:both;">Размер: {{ data.board.w }}x{{ data.board.h }}</div>
+		  </div>
+		  <div class="settings" v-show="state === 'settings'">
+		    <div style="display: inline-block; vertical-align: top;">
+		      <table>
+		        <tr>
+		          <td colspan="2">
+		            <button v-on:click="newGame()">Новая игра</button>
+		          </td>
+		        </tr>
+		        <tr>
+		          <td>Размер клетки</td>
+		          <td>
+		            <input type="number" v-model="data.brickSize" min="4" max="32"/>
+		          </td>
+		        </tr>
+		        <tr>
+		          <td>Ширина</td>
+		          <td>
+		            <input type="number" v-model="data.board.w" min="5" max="20"/>
+		          </td>
+		        </tr>
+		        <tr>
+		          <td>Высота</td>
+		          <td>
+		            <input type="number" v-model="data.board.h" min="5" max="40"/>
+		          </td>
+		        </tr>
+		        <tr>
+		          <td>Скорость</td>
+		          <td>
+		            <input type="number" v-model="data.speed" min="1" max="12"/>
+		          </td>
+		        </tr>
+		      </table>
+		    </div>
+		   
+		  </div>
+		</div>
+		  
+	</div>
+
+	
+	<div id="services" class="color black">
+		
+		<!--start: Container -->
+		<div class="container">
+
+			<!--start: Wrapper -->
+			<div class="wrapper span12">
+				
+							<!-- start: Page Title -->
+			<div id="page-title">
+
+				<div id="page-title-inner">
+
+					<h2><span>Про игру</span></h2>
+
+				</div>	
+
+			</div>
+			<!-- end: Page Title -->
+			
+			<!-- start: Row -->
+      		<div class="row-fluid">
+	
+        		<div class="span12">
+	
+					<p>
+					Тетрис — это очень популярная игра, которая появилась в 80-х. Если вы не знаете, как играть в нее, самое время научиться.
+					</p>	
+          			
+        		</div>
+			
+			</div>
+			<!-- end: Row -->
+			
+			<!-- start: Row -->
+      		<div class="row-fluid">
+	
+        		<div class="span6">
+	
+					<p>
+						Передвигайте фигурки  вправо и влево при помощи кнопок:</p>
+						<br> W - изменить положение фигуры;
+						<br> A - влево;
+						<br> D - вправо;
+						<br> S - вниз;
+
+						<p><br> Попробуйте передвинуть тетрамино так, чтобы они сложились в ряд.
+					</p>	
+          			
+        		</div>
+
+				<div class="span6">
+	
+					<p>
+						
+Есть разные фигурки тетрамино. В  игре есть семь типов тетрамино:</p><p>
+<br>I - образные тетрамино нужны для того, чтобы заполнять пробелы в четырех линиях сразу.
+<br>O - образные, чтобы заполнять большие пробелы.
+<br>L - образные , чтобы заполнять пробелы среднего размера.
+<br>J - образные развернуты в противоположную сторону от L-тетрамино.
+<br>S - образные, чтобы заполнять маленькие пробелы.
+<br>Z - образные развернуты в противоположную сторону от S-тетрамино.
+					</p>	
+          			
+        		</div>
+			
+			</div>
+			<!-- end: Row -->	
+	
+      		<!-- start: Row -->
+      		<div class="row-fluid">
+	
+        		
+          			
+Заполните все ряды, чтобы завершить уровень и получить очки. Чем больше рядов, тем больше очков получите. 
+        		</div>
+
+        		
+			<!-- end: Row -->
+			
+			<div class="clearfix"></div>
+			<hr class="clean">					
+			</div>
+			<!-- end: Wrapper -->
+		
+		</div>
+		<!--end: Container -->
+		
+	</div>
+	<!-- end: 2nd Page - Services -->
+	
+
+
+
+</div>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.imagesloaded.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
+		<script type="text/javascript" src="js/jquery.ba-cond.min.js"></script>
+		<script type="text/javascript" src="js/jquery.slitslider.js"></script>
+		<script type="text/javascript" src="js/excanvas.js"></script>
+
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.min.js'></script>
+		<script  src="js/index.js"></script>
+			
+		<script defer="defer" src="js/custom.js"></script>
+		<script type="text/javascript">	
+
+
+			$(function() {
+			
+				var Page = (function() {
+
+					var $navArrows = $( '#nav-arrows' ),
+						$nav = $( '#nav-dots > span' ),
+						slitslider = $( '#slider' ).slitslider( {
+							onBeforeChange : function( slide, pos ) {
+
+								$nav.removeClass( 'nav-dot-current' );
+								$nav.eq( pos ).addClass( 'nav-dot-current' );
+
+							}
+						} ),
+
+						init = function() {
+
+							initEvents();
+							
+						},
+						initEvents = function() {
+
+							// add navigation events
+							$navArrows.children( ':last' ).on( 'click', function() {
+
+								slitslider.next();
+								return false;
+
+							} );
+
+							$navArrows.children( ':first' ).on( 'click', function() {
+								
+								slitslider.previous();
+								return false;
+
+							} );
+
+							$nav.each( function( i ) {
+							
+								$( this ).on( 'click', function( event ) {
+									
+									var $dot = $( this );
+									
+									if( !slitslider.isActive() ) {
+
+										$nav.removeClass( 'nav-dot-current' );
+										$dot.addClass( 'nav-dot-current' );
+									
+									}
+									
+									slitslider.jump( i + 1 );
+									return false;
+								
+								} );
+								
+							} );
+
+						};
+
+						return { init : init };
+
+				})();
+
+				Page.init();
+			
+			});
+		</script>
+
+
+		  
+</body>
+</html>
